@@ -1,0 +1,39 @@
+<div class="container" >
+  <ng-template #erreur>
+    <div class="mt-5 center text-danger">{{errormessage}}</div>
+  </ng-template>
+  <div class="card mt-5" *ngIf="productsList; else erreur">
+    <div class="card-header">List's Products</div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Price</th><th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of product">
+          <th>{{p.id}}</th>
+          <th>{{p.name}}</th>
+          <th>{{p.prix}}</th>
+          <th>
+            <button (click)="DeleteProduct(p)" class="btn btn-danger">
+              <i class=" bi bi-trash3"></i>
+            </button>
+          </th>
+        </tr>
+        <tr *ngFor="let p1 of productsList">
+          <th>{{p1.id}}</th>
+          <th>{{p1.name}}</th>
+          <th>{{p1.prix}}</th>
+          <th>
+            <button (click)="DeleteProduct(p1)" class="btn btn-danger">
+              <i class=" bi bi-trash3"></i>
+            </button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

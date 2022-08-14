@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+/* On peut aussi utiliser le fichier angular.json
+pour integrer bootstrapCSS et botstrapJS -- Go to this file and search about style*/
+/*A chaque fois nous avons changer quellque chose dans angular.json il faut
+ le redemarrer le serveur pour lire les dependances ajouter dans ce fichier la */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
