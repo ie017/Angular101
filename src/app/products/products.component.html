@@ -5,35 +5,74 @@
   <div class="card mt-5" *ngIf="productsList; else erreur">
     <div class="card-header">List's Products</div>
     <div class="card-body">
+      <form class="input-group" [formGroup]="searchFormGroup" (ngSubmit)="doSearchProducts()" >
+        <!-- Pour dire que ce form indique searchFormGroup on va utilisée [formGroup] -->
+        <!-- Appliquer doSearchProducts() lorsque on valide le formulaire -->
+        <label class="input-group-text">Keyword :</label>
+        <input type="text" class="form-control" formControlName="keyword">
+        <!-- formControlName pour indique que la valeur saisir il faut le stocker
+        dans le variable qui s'appelle keyword de formControlName de searchFormGroup qui se
+        trouve dans products.component.ts et ça c'est le DATA BINDING-->
+        <button class="btn btn-info">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
       <table class="table">
         <thead>
         <tr>
-          <th>ID</th><th>Name</th><th>Price</th><th>Delete</th>
+          <th>ID</th><th>Name</th><th>Price</th><th>Promotion</th><th>On/Off</th><th>Delete</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let p of product">
+        <!--<tr *ngFor="let p of product">
           <th>{{p.id}}</th>
           <th>{{p.name}}</th>
-          <th>{{p.prix}}</th>
+          <th>{{p.price}}</th>
+          <th>
+            <i *ngIf="p.promotion == true" class="bi bi-heart-fill text-success"></i>
+          </th>
+          <th>
+            <button [ngClass]="p.promotion == true? 'btn-danger':'btn-success'" class="btn"
+            (click)="changePromotion(p)">
+              <span *ngIf="p.promotion == false" class="btn btn-success">Promotion On</span>
+              <span *ngIf="p.promotion == true" class="btn btn-danger">Promotion Off</span>
+            </button>
+          </th>
           <th>
             <button (click)="DeleteProduct(p)" class="btn btn-danger">
               <i class=" bi bi-trash3"></i>
             </button>
           </th>
-        </tr>
+        </tr>-->
         <tr *ngFor="let p1 of productsList">
           <th>{{p1.id}}</th>
           <th>{{p1.name}}</th>
-          <th>{{p1.prix}}</th>
+          <th>{{p1.price}}</th>
           <th>
-            <button (click)="DeleteProduct(p1)" class="btn btn-danger">
+            <i *ngIf="p1.promotion == true" class="bi bi-heart-fill text-success"></i>
+          </th>
+          <th>
+            <button [ngClass]="p1.promotion == true? 'btn-danger':'btn-success'" class="btn"
+                    (click)="changePromotion(p1)">
+              <span *ngIf="p1.promotion == false" class="btn btn-success">Promotion On</span>
+              <span *ngIf="p1.promotion == true" class="btn btn-danger">Promotion Off</span>
+            </button>
+          </th>
+          <th>
+            <button (click)="deleteProdcuts(p1)" class="btn btn-danger">
               <i class=" bi bi-trash3"></i>
             </button>
           </th>
         </tr>
         </tbody>
       </table>
+      <ul class="nav nav-pills">
+        <li *ngFor="let item of [].constructor(this.totalPages); let i=index">
+          <!--let i=index mean do loop in all index of [].constructor(this.totalPages)-->
+          <!--[].constructor(this.totalPages) is a table with lenght equal this.totalPages-->
+          <a (click)="getPage(i)" [ngClass]="i==this.currentPage? 'btn-info':'btn-outline-info'" class="btn ms-1 mt-1">{{i}}</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
