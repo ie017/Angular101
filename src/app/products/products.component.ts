@@ -3,6 +3,8 @@ import {ProductService} from "../services/product.service";
 import {Product} from "../model/product.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {filter} from "rxjs";
+import {AuthenticationService} from "../services/authentication.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -21,7 +23,7 @@ export class ProductsComponent implements OnInit {
   sizePage : number=6;
   totalPages : number=0;
   currentAction : string="All"
-  constructor(private productService : ProductService, private fb : FormBuilder) { }
+  constructor(private productService : ProductService, private fb : FormBuilder, public authService : AuthenticationService, public router : Router) { }
 
   ngOnInit(): void { /* ngOnInit est la methode qui c'est exécute a chaque demarrage de server de angular*/
     this.searchFormGroup = this.fb.group({
@@ -125,5 +127,13 @@ export class ProductsComponent implements OnInit {
       this.getPageProduct();
     else
       this.doSearchProducts();
+  }
+
+  forAddProduct() {
+    this.router.navigateByUrl("/admin/addProduct")
+  }
+
+  editProdcuts(product: Product) {
+    this.router.navigateByUrl("/admin/editProduct/"+product.id);
   }
 }

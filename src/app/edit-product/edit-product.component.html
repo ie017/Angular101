@@ -1,0 +1,21 @@
+<div class="container mt-3 col-md-6 offset-md-3">
+  <form [formGroup]="productFormGroup" (ngSubmit)="editProduct()">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input class="form-control" type="text" formControlName="name">
+      <small *ngIf="productFormGroup.controls['name'].errors && productFormGroup.controls
+       ['name'].touched" class="text-danger">{{productService.geterrorMessage('name',productFormGroup.controls['name'].errors)}}</small>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input class="form-control" type="text" formControlName="price">
+      <small *ngIf="productFormGroup.controls['price'].errors && productFormGroup.controls
+       ['price'].touched" class="text-danger">{{productService.geterrorMessage('price',productFormGroup.controls['price'].errors)}}</small>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Promotion</label>
+      <input class="form-check" type="checkbox" formControlName="promotion">
+    </div>
+    <button [disabled]="!productFormGroup.valid" class="btn btn-outline-info" type="submit" (click)="editProduct()">Update</button>
+  </form>
+</div>

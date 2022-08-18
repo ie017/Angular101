@@ -1,4 +1,7 @@
 <div class="container" >
+  <div class="mt-1">
+    <button *ngIf="authService.hasRole('ADMIN')" class="btn btn-info" (click)="forAddProduct()"> Add Product</button>
+  </div>
   <ng-template #erreur>
     <div class="mt-5 center text-danger">{{errormessage}}</div>
   </ng-template>
@@ -20,7 +23,9 @@
       <table class="table">
         <thead>
         <tr>
-          <th>ID</th><th>Name</th><th>Price</th><th>Promotion</th><th>On/Off</th><th>Delete</th>
+          <th>ID</th><th>Name</th><th>Price</th><th>Promotion</th><th *ngIf="authService.hasRole('ADMIN')">On/Off</th>
+          <th *ngIf="authService.hasRole('ADMIN')">Delete</th>
+          <th *ngIf="authService.hasRole('ADMIN')">Edit</th><!-- Show the two th if the user has role admin -->
         </tr>
         </thead>
         <tbody>
@@ -51,16 +56,21 @@
           <th>
             <i *ngIf="p1.promotion == true" class="bi bi-heart-fill text-success"></i>
           </th>
-          <th>
+          <th *ngIf="authService.hasRole('ADMIN')">
             <button [ngClass]="p1.promotion == true? 'btn-danger':'btn-success'" class="btn"
                     (click)="changePromotion(p1)">
               <span *ngIf="p1.promotion == false" class="btn btn-success">Promotion On</span>
               <span *ngIf="p1.promotion == true" class="btn btn-danger">Promotion Off</span>
             </button>
           </th>
-          <th>
+          <th *ngIf="authService.hasRole('ADMIN')">
             <button (click)="deleteProdcuts(p1)" class="btn btn-danger">
               <i class=" bi bi-trash3"></i>
+            </button>
+          </th>
+          <th *ngIf="authService.hasRole('ADMIN')">
+            <button (click)="editProdcuts(p1)" class="btn btn-success">
+              <i class=" bi bi-file"></i>
             </button>
           </th>
         </tr>

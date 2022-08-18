@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="col-md-6 offset-md-3">
+    <div class="card mt-5">
+      <div class="card-header">Authentication :</div>
+      <div *ngIf="errorMessage" class="text-danger">{{errorMessage}}</div>
+      <div class="card-body">
+        <!--{{userFormGroup.value|json}} : when you declare this
+         you can watch the concept of data binding -->
+        <form [formGroup]="userFormGroup" (ngSubmit)="doLogin()">
+          <div class="mb-3">
+            <label class="form-label">User Name:</label>
+            <input class="form-control" type="text" formControlName="username">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password:</label>
+            <input class="form-control" type="password" formControlName="password">
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>

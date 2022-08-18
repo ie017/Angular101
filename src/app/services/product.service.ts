@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from "rxjs";
 import {PageProducts, Product} from "../model/product.model";
 import {UUID} from "angular2-uuid";
+import {ValidationErrors} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root' /* Indique que ce service est se trouve dans la racine de ce projet
@@ -65,5 +66,30 @@ export class ProductService {
     }
     let pageProducts = listProducts.slice(index, index+size);
     return of({page : page, totalPages : totalPages, products : pageProducts, size : size});
+  }
+  public productInDb(ourProduct : Product) :Observable<boolean>{
+    ourProduct.id = UUID.UUID();
+    this.productsList.push(ourProduct);
+    return of(true);
+  }
+
+  getProduct(productID: string) : Observable<Product>{
+    let product = this.productsList.find(p => p.id == productID);
+    if (product == undefined) return throwError(()=> new Error("Your product has not exist"));
+    return of(product);
+  }
+  geterrorMessage(name: string, errors: ValidationErrors) {
+    if (errors['required']){
+      return name + 'is required';
+    } else if(errors['minlength']){
+      return name + ' should have at least '+errors['minlength']['requiredLength']+ ' Characters';
+    } else if(errors['min']){
+      return name + ' should have min value '+errors['min']['min'];
+    } else return "";
+  }
+
+  updateProduct(product: Product) : Observable<boolean>{
+    this.productsList = this.productsList.map(p => (p.id == product.id)?product : p);
+    return of(true);
   }
 }

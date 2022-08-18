@@ -1,0 +1,22 @@
+<div class="container mt-3 col-md-6 offset-md-3">
+  <form [formGroup]="productFormGroups">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input class="form-control" type="text" formControlName="name">
+      <small *ngIf="productFormGroups.controls['name'].errors && productFormGroups.controls
+       ['name'].touched" class="text-danger">{{productService.geterrorMessage('name',productFormGroups.controls['name'].errors)}}</small>
+      <!-- Affichage des messages des erreurs de le champs name après le saisie de queleque chose-->
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input class="form-control" type="text" formControlName="price">
+      <small *ngIf="productFormGroups.controls['price'].errors && productFormGroups.controls
+       ['price'].touched" class="text-danger">{{productService.geterrorMessage('price',productFormGroups.controls['price'].errors)}}</small>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Promotion</label>
+      <input class="form-check" type="checkbox" formControlName="promotion">
+    </div>
+    <button [disabled]="!productFormGroups.valid" class="btn btn-outline-info" type="submit" (click)="addNewProduct()">Save</button>
+  </form>
+</div>
