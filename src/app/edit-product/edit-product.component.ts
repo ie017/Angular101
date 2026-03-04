@@ -6,6 +6,7 @@ import {ProductService} from "../services/product.service";
 
 @Component({
   selector: 'app-edit-product',
+  standalone: false,
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })

@@ -6,6 +6,7 @@ import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-admin-template',
+  standalone: false,
   templateUrl: './admin-template.component.html',
   styleUrls: ['./admin-template.component.css']
 })
