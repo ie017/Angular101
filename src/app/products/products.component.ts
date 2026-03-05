@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../services/product.service";
-import {Product} from "../model/product.model";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {filter} from "rxjs";
-import {AuthenticationService} from "../services/authentication.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from '../services/product.service';
+import { Product } from '../model/product.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { filter } from 'rxjs';
+import { AuthenticationService } from '../services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
